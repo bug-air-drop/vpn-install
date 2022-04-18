@@ -46,10 +46,10 @@ echo "Found next network interfaces:"
 ifconfig -a | sed 's/[: \t].*//;/^\(lo\|\)$/d'
 echo
 GATE=$(route | grep '^default' | grep -o '[^ ]*$')
-read -p "Enter your external network interface: " -i $GATE -e GATE
+#read -p "Enter your external network interface: " -i $GATE -e GATE
 
 STATIC="yes"
-read -p "Your external IP is $IP. Is this IP static? [yes] " ANSIP
+#read -p "Your external IP is $IP. Is this IP static? [yes] " ANSIP
 : ${ANSIP:=$STATIC}
 
 if [ "$STATIC" == "$ANSIP" ]; then

@@ -15,37 +15,7 @@ fi
 	LOGIN="vpn"
 	PASSWORD="zhimakaimen"
 
-	DELETED=0
-
-	$DIR/checkuser.sh $LOGIN
-
-	if [[ $? -eq 0 ]]; then
-		NOTREM="no"
-		read -p "User '$LOGIN' already exists. Do you want to remove existing user? [no] " ANSREM
-		: ${ANSREM:=$NOTREM}
-
-		if [ "$NOTREM" == "$ANSREM" ]; then
-			unset LOGIN PASSWORD
-			if [[ $# -gt 0 ]]; then
-				# exit, if script is called with params
-				ANSUSER=$NOTADDUSER
-			else
-				read -p "Would you want to add another user? [no] " ANSUSER
-				: ${ANSUSER:=$NOTADDUSER}
-				unset LOGIN
-			fi
-			continue
-		else
-			$DIR/deluser.sh $LOGIN
-			DELETED=1
-		fi
-	fi
-
-	echo -e "$LOGIN\t    *\t    $PASSWORD\t    *" >> $CHAPSECRETS
-
-	if [ $DELETED -eq 0 ]; then
-		echo "$CHAPSECRETS has been updated!"
-	fi
+	echo -e "$LOGIN\t    *\t    $PASSWORD\t    *" > $CHAPSECRETS
 
 	PSK=$(sed -n "s/^[^#]\+[[:space:]]\+PSK[[:space:]]\+\"\(.\+\)\"/\1/p" $SECRETSFILE)
 

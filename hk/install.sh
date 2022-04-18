@@ -65,4 +65,5 @@ echo
 echo "Installation script has been completed!"
 
 echo "IP: $IP"
+echo "GATE: $GATE"
 
